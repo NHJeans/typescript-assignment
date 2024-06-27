@@ -5,7 +5,7 @@ import CountryItem from "./CountryItem";
 import LoadingSpinner from "./LoadingSpinner";
 
 const CountryList: React.FC = () => {
-  const { data: countries, error, isLoading } = useCountries();
+  const { data: countries, error, isPending } = useCountries();
   const [favoriteCountries, setFavoriteCountries] = useState<Country[]>([]);
 
   // 즐겨찾기에 추가된 국가인지 확인
@@ -35,7 +35,7 @@ const CountryList: React.FC = () => {
     isFavorite(country) ? removeFavorite(country) : addFavorite(country);
   };
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex justify-center items-center h-screen">
         <LoadingSpinner />
@@ -53,7 +53,7 @@ const CountryList: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-4xl font-bold mb-10 text-center">
+      <h2 className="text-4xl font-bold mb-10 text-center mt-8">
         Favorite Countries
       </h2>
       <div className="country-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
